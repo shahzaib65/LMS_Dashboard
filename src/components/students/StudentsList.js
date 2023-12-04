@@ -15,7 +15,7 @@ const StudentsList = () => {
 
 
     const students = () =>{
-   axios.get("https://lms-backend-cyan.vercel.app/api/auth/user/students")
+   axios.get("https://odd-lime-caiman-cap.cyclic.app/api/auth/user/students")
    .then(response => {
     setStudents(response.data.users)
   

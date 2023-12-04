@@ -12,7 +12,7 @@ import VideoThumbnail from 'react-video-thumbnail';
    },[])
 
    const getCourses =()=>{
-     axios.get("https://lms-backend-cyan.vercel.app/api/course/get-course")
+     axios.get("https://odd-lime-caiman-cap.cyclic.app/api/course/get-course")
      .then(response => {
       setCourses(response.data.courses)
       console.log(response.data.courses);

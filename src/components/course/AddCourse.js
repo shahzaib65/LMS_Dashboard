@@ -33,12 +33,11 @@ export default function AddCourse() {
        data1.append("course_price", data.price);
        data1.append("course_discount",data.discount);
        data1.append("standard",data.standard);
-       data1.append("course_price",data.price)
-     console.log(data1)
+       
      const config = {     
     headers: { 'content-type': 'multipart/form-data' }
 }
-axios.post("https://lms-backend-cyan.vercel.app/api/course/register-course",data1, config)
+axios.post("http://localhost:5000/api/course/register-course",data1, config)
     .then(response => {
         console.log(response);
         reset();

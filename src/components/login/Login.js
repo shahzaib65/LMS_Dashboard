@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Login = ({onLogin}) => {
   const navigate = useNavigate();
 
    const [error, setError] = useState("");
@@ -33,7 +33,7 @@ const Login = () => {
        className="space-y-6"
        onSubmit={handleSubmit(async (data) => {
   
-  const response = await fetch("http://localhost:5000/api/auth/user/login", {
+  const response = await fetch("https://odd-lime-caiman-cap.cyclic.app/api/auth/user/login", {
           method: "POST",
           body: JSON.stringify({
             email: data.email,
@@ -45,8 +45,12 @@ const Login = () => {
           const data = await response.json();
           console.log(data);
           setError("");
-          navigate("/home");
-         
+          const isAuthenticated = true;
+          if (isAuthenticated) {
+      onLogin();
+    } else {
+      alert('Invalid credentials. Please try again.');
+    }   
         }else{
           const error = await response.text()
           setError(error)
