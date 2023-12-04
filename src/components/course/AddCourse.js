@@ -37,7 +37,7 @@ export default function AddCourse() {
      const config = {     
     headers: { 'content-type': 'multipart/form-data' }
 }
-axios.post("http://localhost:5000/api/course/register-course",data1, config)
+axios.post("https://odd-lime-caiman-cap.cyclic.app/api/course/register-course",data1, config)
     .then(response => {
         console.log(response);
         reset();
