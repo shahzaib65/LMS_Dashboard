@@ -11,7 +11,16 @@ import VideoThumbnail from 'react-video-thumbnail';
   getCourses()
    },[])
 
-
+   const deleteCourse = (id) => {
+    axios.delete(`https://lms-backend-production-068b.up.railway.app/api/course/delete-course/${id}`)
+    .then((res)=>{
+     getCourses()
+  alert("User deleted")
+  
+    }).catch((err)=>{
+     console.log(err)
+    })
+   }
    
 
    const toggleFullText = () => {
@@ -65,6 +74,12 @@ import VideoThumbnail from 'react-video-thumbnail';
         </button>
       )}
     </div>
+
+    <button className=" bg-indigo-500 text-white font-sans text-base px-2 rounded-md w-full py-2 my-2" onClick={()=>{
+  deleteCourse(course._id)
+
+    }}>Delete course</button>
+
               </div>
             ))}
           </div>
