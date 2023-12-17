@@ -15,7 +15,7 @@ const StudentsList = () => {
 
 
     const students = () =>{
-   axios.get("http://localhost:5000/api/user/students")
+   axios.get("https://lms-backend-production-068b.up.railway.app/api/user/students")
    .then(response => {
     setStudents(response.data.users)
   

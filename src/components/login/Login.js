@@ -42,7 +42,7 @@ const Login = ({onLogin}) => {
        className="space-y-6"
        onSubmit={handleSubmit(async (data) => {
     setLoading(true)
-  const response = await fetch("http://localhost:5000/api/user/login", {
+  const response = await fetch("https://lms-backend-production-068b.up.railway.app/api/user/login", {
           method: "POST",
           body: JSON.stringify({
             email: data.email,

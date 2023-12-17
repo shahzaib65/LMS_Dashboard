@@ -12,7 +12,7 @@ import VideoThumbnail from 'react-video-thumbnail';
    },[])
 
    const getCourses =()=>{
-     axios.get("http://localhost:5000/api/course/get-course")
+     axios.get("https://lms-backend-production-068b.up.railway.app/api/course/get-course")
      .then(response => {
       setCourses(response.data.courses)
       console.log(response.data.courses);

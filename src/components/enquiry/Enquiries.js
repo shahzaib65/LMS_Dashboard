@@ -10,7 +10,7 @@ const Enquiries = () => {
     },[])
  
     const getEnquery =()=>{
-      axios.get("http://localhost:5000/api/enquiry/get-enquiry")
+      axios.get("https://lms-backend-production-068b.up.railway.app/api/enquiry/get-enquiry")
       .then(response => {
        setEnquery(response.data.enquiries)
        console.log(response.data.enquiries);
