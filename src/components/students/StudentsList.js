@@ -4,10 +4,16 @@ const StudentsList = () => {
 
   const[student,setStudents] = useState([])
 
-    const handleClick = () => {
-       console.log('worrk')
-     alert('working')
-      };
+    const deleteClick = (id) => {
+     axios.delete(`https://lms-backend-production-068b.up.railway.app/api/user/delete-user/${id}`)
+     .then((res)=>{
+      students()
+   alert("User deleted")
+   
+     }).catch((err)=>{
+      console.log(err)
+     })
+    }
 
   useEffect(()=>{
    students();
@@ -55,8 +61,10 @@ const StudentsList = () => {
                   <td className="whitespace-nowrap px-6 py-4 text-white">{e.role}</td>
                   <td className="whitespace-nowrap px-6 py-4 text-white">{e.email}</td>
                   <td className=' space-x-2'>
-                  <button className="text-blue-500 font-normal text-sm hover:underline mr-2" onclick="editUser(2)">Edit</button>
-                    <button className="text-red-500 font-normal text-sm hover:underline" onclick="deleteUser(2)">Delete</button>
+                  {/* <button className="text-blue-500 font-normal text-sm hover:underline mr-2" onclick="editUser(2)">Edit</button> */}
+                    <button className="text-red-500 font-normal text-sm hover:underline" onClick={()=>{
+                      deleteClick(e._id)
+                    }}>Delete</button>
                   </td>
                 </tr>
                 ))
