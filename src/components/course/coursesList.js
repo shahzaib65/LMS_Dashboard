@@ -12,7 +12,7 @@ import VideoThumbnail from 'react-video-thumbnail';
    },[])
 
    const getCourses =()=>{
-     axios.get("https://odd-lime-caiman-cap.cyclic.app/api/course/get-course")
+     axios.get("http://localhost:5000/api/course/get-course")
      .then(response => {
       setCourses(response.data.courses)
       console.log(response.data.courses);
@@ -22,13 +22,17 @@ import VideoThumbnail from 'react-video-thumbnail';
   });
    }
     return (
-      <div className="">
+      <div className=" w-full h-full">
+     <div className="flex items-center justify-center h-20 bg-white">
+      <p className="text-center font-semibold text-lg">Courses list</p>
+    </div>
+
         <div className="mx-auto items-center max-w-7xl px-10 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
           <h2 className="sr-only text-white">Courses</h2>
           <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8 items-center">
             {courses.map((course) => (
-              <a key={course._id} href={course.href} className="group">
-                <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7">
+              <div  key={course._id} href={course.href} className=" bg-gray-950 py-2 px-2 rounded-md">
+                <div className="">
                   <VideoThumbnail
                   videoUrl={course.course_video_url}
                     className="h-full w-full"
@@ -41,7 +45,7 @@ import VideoThumbnail from 'react-video-thumbnail';
                 </div>
                
                 <p className="mt-1 text-sm font-normal text-white">{course.course_description}</p>
-              </a>
+              </div>
             ))}
           </div>
         </div>

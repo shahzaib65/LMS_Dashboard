@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import axios from "axios"
+import axios from "axios";
+import { ClipLoader } from 'react-spinners';
 export default function AddCourse() {
   
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
 
@@ -19,6 +21,13 @@ export default function AddCourse() {
   } = useForm();
   return (
     <div className=" max-w-7xl mx-auto rounded-lg bg-gray-900 px-6 lg:py-4 mt-20 lg:px-8 sm:py-4">
+{
+   loading ? (
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+   <ClipLoader className=' items-center w-full h-full' color="#FFFFFF" loading={loading} size={50} />
+   </div>
+   ): (
+<>
 <div className=" flex justify-center items-center">
 <p className=" text-white font-medium text-2xl py-5">Add courses</p>
 </div>
@@ -26,6 +35,7 @@ export default function AddCourse() {
        noValidate
        className="bg-gray-900 mx-auto mt-5 max-w-xl sm:mt-6"
        onSubmit={handleSubmit(async (data) => {
+        setLoading(true)
         const data1 = new FormData();
        data1.append("video",selectedFile);
        data1.append("course_name",data.title);
@@ -37,18 +47,22 @@ export default function AddCourse() {
      const config = {     
     headers: { 'content-type': 'multipart/form-data' }
 }
-axios.post("https://odd-lime-caiman-cap.cyclic.app/api/course/register-course",data1, config)
+axios.post("http://localhost:5000/api/course/register-course",data1, config)
     .then(response => {
         console.log(response);
         reset();
+        setLoading(false);
+        alert("Course uploaded")
     })
     .catch(error => {
         console.log(error);
         setError(error)
+        setLoading(false)
     });
        })}
        >
         <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
+
           <div>
             <label
               htmlFor="first-name"
@@ -71,6 +85,7 @@ axios.post("https://odd-lime-caiman-cap.cyclic.app/api/course/register-course",d
                 )}
             </div>
           </div>
+
           <div>
             <label
               htmlFor="last-name"
@@ -203,6 +218,12 @@ axios.post("https://odd-lime-caiman-cap.cyclic.app/api/course/register-course",d
           </button>
         </div>
       </form>
+</>
+   )
+}
+
+
+
     </div>
   );
 }

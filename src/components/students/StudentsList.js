@@ -15,7 +15,7 @@ const StudentsList = () => {
 
 
     const students = () =>{
-   axios.get("https://odd-lime-caiman-cap.cyclic.app/api/auth/user/students")
+   axios.get("http://localhost:5000/api/user/students")
    .then(response => {
     setStudents(response.data.users)
   

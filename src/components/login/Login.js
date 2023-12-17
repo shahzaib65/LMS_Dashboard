@@ -1,10 +1,12 @@
 import React,{useState} from 'react'
 import { useForm } from "react-hook-form";
+
+import { ClipLoader } from 'react-spinners';
 import { useNavigate } from "react-router-dom";
 
 const Login = ({onLogin}) => {
-  const navigate = useNavigate();
-
+  let navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
    const [error, setError] = useState("");
 
    const {
@@ -15,8 +17,15 @@ const Login = ({onLogin}) => {
 
   return (
    <>
-   <div className="flex min-h-full flex-1 flex-col px-6 py-12 lg:px-8">
-     <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+   <div className="flex min-h-full flex-col px-6 py-12 lg:px-8">
+{
+  loading ? (
+   <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+   <ClipLoader className=' items-center w-full h-full' color="#FFFFFF" loading={loading} size={50} />
+   </div>
+  ): (
+    <>
+    <div className="sm:mx-auto sm:w-full sm:max-w-sm">
        <img
          className="mx-auto h-10 w-auto"
          src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
@@ -32,8 +41,8 @@ const Login = ({onLogin}) => {
        noValidate
        className="space-y-6"
        onSubmit={handleSubmit(async (data) => {
-  
-  const response = await fetch("https://odd-lime-caiman-cap.cyclic.app/api/auth/user/login", {
+    setLoading(true)
+  const response = await fetch("http://localhost:5000/api/user/login", {
           method: "POST",
           body: JSON.stringify({
             email: data.email,
@@ -43,17 +52,14 @@ const Login = ({onLogin}) => {
         });
         if (response.ok) {
           const data = await response.json();
-          console.log(data);
           setError("");
-          const isAuthenticated = true;
-          if (isAuthenticated) {
-      onLogin();
-    } else {
-      alert('Invalid credentials. Please try again.');
-    }   
+          setLoading(false);
+          navigate("/home")
+         
         }else{
           const error = await response.text()
           setError(error)
+          setLoading(false)
         }
       })} 
        >
@@ -113,6 +119,15 @@ const Login = ({onLogin}) => {
          </div>
        </form>
      </div>
+    </>
+  )
+}
+
+    
+
+ 
+
+
    </div>
  </>
   )
