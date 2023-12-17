@@ -6,10 +6,17 @@ import VideoThumbnail from 'react-video-thumbnail';
   export default function CoursesList() {
 
     const[courses,setCourses] = useState([])
-
+    const [showFullText, setShowFullText] = useState(false);
    useEffect(()=>{
   getCourses()
    },[])
+
+
+   
+
+   const toggleFullText = () => {
+     setShowFullText(!showFullText);
+   };
 
    const getCourses =()=>{
      axios.get("https://lms-backend-production-068b.up.railway.app/api/course/get-course")
@@ -44,7 +51,23 @@ import VideoThumbnail from 'react-video-thumbnail';
                 <p className="mt-1 mx-2 text-lg line-through font-medium text-white">{course.course_discount}</p>
                 </div>
                
-                <p className="mt-1 text-sm font-normal text-white">{course.course_description}</p>
+                {/* <p className="mt-1 text-sm font-normal text-white">{course.course_description}</p> */}
+                <div className="max-w-prose mx-auto">
+      <p className={`line-clamp-3 ${showFullText ? 'line-clamp-none' : ''}`}>
+        Your long text goes here. This text will be truncated after three lines.Your long text goes here. This text will be truncated after three lines.Your long text goes here. This text will be truncated after three lines.Your long text goes here. This text will be truncated after three lines.Your long text goes here. This text will be truncated after three lines.
+        Your long text goes here. This text will be truncated after three lines.
+        Your long text goes here. This text will be truncated after three lines.
+        Your long text goes here. This text will be truncated after three lines.
+      </p>
+      {!showFullText && (
+        <button
+          className="text-blue-500 hover:underline focus:outline-none"
+          onClick={toggleFullText}
+        >
+          Read More
+        </button>
+      )}
+    </div>
               </div>
             ))}
           </div>
