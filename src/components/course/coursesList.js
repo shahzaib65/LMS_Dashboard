@@ -53,11 +53,8 @@ import VideoThumbnail from 'react-video-thumbnail';
                
                 {/* <p className="mt-1 text-sm font-normal text-white">{course.course_description}</p> */}
                 <div className="max-w-prose mx-auto">
-      <p className={`line-clamp-3 ${showFullText ? 'line-clamp-none' : ''}`}>
-        Your long text goes here. This text will be truncated after three lines.Your long text goes here. This text will be truncated after three lines.Your long text goes here. This text will be truncated after three lines.Your long text goes here. This text will be truncated after three lines.Your long text goes here. This text will be truncated after three lines.
-        Your long text goes here. This text will be truncated after three lines.
-        Your long text goes here. This text will be truncated after three lines.
-        Your long text goes here. This text will be truncated after three lines.
+      <p className={`line-clamp-3 text-white ${showFullText ? 'line-clamp-none' : ''}`}>
+      {course.course_description}
       </p>
       {!showFullText && (
         <button
